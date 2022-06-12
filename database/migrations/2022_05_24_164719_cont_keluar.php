@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('angkutan');
             $table->string('driver');
             $table->string('nopol');
+            $table->date('date')->useCurrent();
+            $table->enum('status', ['created', 'archive'])->default('created');
             $table->timestamps();
         });
     }

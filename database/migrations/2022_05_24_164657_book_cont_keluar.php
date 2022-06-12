@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('vessel');
             $table->string('voyage');
             $table->string('tujuan');
+            $table->date('date')->useCurrent();
+            $table->enum('status', ['booked', 'archive'])->default('booked');
             $table->timestamps();
         });
     }

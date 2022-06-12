@@ -46,15 +46,13 @@ class ContMasukController extends Controller
     {
         ContMsk::create([
             'id_book_msk' => $request->id_book_msk,
-            'id_petugas' => $request->id_petugas,
-            'id_cargo' => $request->id_cargo,
-            'tgl_msk' => $request->tgl_msk,
-            'kondisi' => $request->kondisi,
-            'angkutan' => $request->angkutan,
-            'driver' => $request->driver,
-            'nopol' => $request->nopol,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'id_petugas'  => $request->id_petugas,
+            'id_cargo'    => $request->id_cargo,
+            'tgl_msk'     => $request->tgl_msk,
+            'kondisi'     => $request->kondisi,
+            'angkutan'    => $request->angkutan,
+            'driver'      => $request->driver,
+            'nopol'       => $request->nopol,
         ]);
 
         return redirect('/cont_masuk')->with('success', 'Data Berhasil disimpan');

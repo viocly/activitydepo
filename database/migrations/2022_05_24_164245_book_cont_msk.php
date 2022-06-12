@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('asal');
             $table->integer('ukuran');
             $table->string('type');
-            $table->string('status');
+            $table->date('date')->useCurrent();
+            $table->enum('status', ['booked', 'archive'])->default('booked');
             $table->timestamps();
         });
     }
