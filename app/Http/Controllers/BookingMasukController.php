@@ -11,8 +11,7 @@ class BookingMasukController extends Controller
 {
     public function index()
     {
-
-        $book_cont_msk = BookMsk::all();
+        $book_cont_msk = BookMsk::where('stage', 'booked')->get();
 
         return view('booking_masuk.booking_masuk', compact('book_cont_msk'));
     }
@@ -25,19 +24,18 @@ class BookingMasukController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         BookMsk::create([
             'no_container' => $request->no_container,
             'tgl_book_msk' => $request->tgl_book_msk,
-            'customer' => $request->customer,
-            'consigne' => $request->consigne,
-            'vessel' => $request->vessel,
-            'voyage' => $request->voyage,
-            'asal' => $request->asal,
-            'ukuran' => $request->ukuran,
-            'type' => $request->type,
-            'status' => $request->status,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'customer'     => $request->customer,
+            'consigne'     => $request->consigne,
+            'vessel'       => $request->vessel,
+            'voyage'       => $request->voyage,
+            'asal'         => $request->asal,
+            'ukuran'       => $request->ukuran,
+            'type'         => $request->type,
+            'status'       => $request->status,
         ]);
 
         return redirect('/booking_masuk')->with('success', 'Data Berhasil disimpan');

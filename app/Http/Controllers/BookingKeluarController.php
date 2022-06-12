@@ -6,6 +6,7 @@ use App\Models\BookKeluar;
 use App\Models\BookMsk;
 use App\Models\ContMsk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingKeluarController extends Controller
 {
@@ -20,26 +21,38 @@ class BookingKeluarController extends Controller
 
     public function add()
     {
-        $cont_msk = ContMsk::select('cont_msk.*', 'no_container')->join('book_cont_msk', 'book_cont_msk.id', 'cont_msk.id_book_msk')
-            ->whereNotIn('cont_msk.id', BookKeluar::pluck('id_cont_msk'))->get();
+        $cont_msk = ContMsk::select('cont_msk.*', 'no_container')
+                    ->join('book_cont_msk', 'book_cont_msk.id', 'cont_msk.id_book_msk')
+                    ->where('cont_msk.stage', 'created')
+                    ->get();
 
-        // $cont_msk = ContMsk::whereNotIn('id', BookKeluar::pluck('id_cont_msk'))->get();
         return view('booking_keluar.add', compact('cont_msk'));
     }
 
     public function store(Request $request)
     {
-        BookKeluar::create([
-            'id_cont_msk' => $request->id_cont_msk,
-            'tgl_book_keluar' => $request->tgl_book_keluar,
-            'customer' => $request->customer,
-            'shiper' => $request->shiper,
-            'vessel' => $request->vessel,
-            'voyage' => $request->voyage,
-            'tujuan' => $request->tujuan,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        DB::beginTransaction();
+        try {
+            BookKeluar::create([
+                'id_cont_msk'     => $request->id_cont_msk,
+                'tgl_book_keluar' => $request->tgl_book_keluar,
+                'customer'        => $request->customer,
+                'shiper'          => $request->shiper,
+                'vessel'          => $request->vessel,
+                'voyage'          => $request->voyage,
+                'tujuan'          => $request->tujuan,
+            ]);
+
+            ContMsk::where('id', $request->id_cont_msk)->update([
+                'stage' => 'archive'
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            // dd($e);
+            throw $e;
+        }
 
         return redirect('/booking_keluar')->with('success', 'Data Berhasil disimpan');
     }

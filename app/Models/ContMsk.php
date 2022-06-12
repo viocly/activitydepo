@@ -21,6 +21,8 @@ class ContMsk extends Model
         'angkutan',
         'driver',
         'nopol',
+        'date',
+        'stage',
         'created_at',
         'updated_at',
     ];

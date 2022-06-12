@@ -6,6 +6,7 @@ use App\Models\BookKeluar;
 use App\Models\ContKeluar;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContKeluarController extends Controller
 {
@@ -23,28 +24,39 @@ class ContKeluarController extends Controller
     public function add()
     {
         $petugas_survey = Petugas::all();
-        $book_cont_keluar = BookKeluar::select('book_cont_keluar.*', 'no_container')
-            // ->join('book_cont_msk', 'book_cont_msk.id', 'book_cont_msk.id_cont_msk')
+        $book_cont_keluar = BookKeluar::select('book_cont_keluar.*', 'book_cont_msk.no_container')
             ->join('cont_msk', 'cont_msk.id', 'book_cont_keluar.id_cont_msk')
-            ->whereNotIn('book_cont_keluar.id', ContKeluar::pluck('id_book_keluar'))->get();
+            ->join('book_cont_msk', 'book_cont_msk.id', 'cont_msk.id_book_msk')
+            ->where('book_cont_keluar.stage', 'booked')
+            ->get();
+
 
         return view('cont_keluar.add', compact('book_cont_keluar', 'petugas_survey'));
     }
 
     public function store(Request $request)
     {
+        DB::beginTransaction();
+        try {
+            ContKeluar::create([
+                'id_book_keluar' => $request->id_book_keluar,
+                'id_petugas'     => $request->id_petugas,
+                'tgl_msk'        => $request->tgl_msk,
+                'kondisi'        => $request->kondisi,
+                'angkutan'       => $request->angkutan,
+                'driver'         => $request->driver,
+                'nopol'          => $request->nopol,
+            ]);
 
-        ContKeluar::create([
-            'id_book_keluar' => $request->id_book_keluar,
-            'id_petugas' => $request->id_petugas,
-            'tgl_msk' => $request->tgl_msk,
-            'kondisi' => $request->kondisi,
-            'angkutan' => $request->angkutan,
-            'driver' => $request->driver,
-            'nopol' => $request->nopol,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+            BookKeluar::where('id', $request->id_book_keluar)->update([
+                'stage' => 'archive'
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            // dd($e);
+            throw $e;
+        }
 
         return redirect('/cont_masuk')->with('success', 'Data Berhasil disimpan');
     }

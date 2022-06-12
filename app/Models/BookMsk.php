@@ -23,6 +23,8 @@ class BookMsk extends Model
         'ukuran',
         'type',
         'status',
+        'date',
+        'stage',
         'created_at',
         'updated_at',
     ];

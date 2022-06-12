@@ -20,6 +20,8 @@ class BookKeluar extends Model
         'vessel',
         'voyage',
         'tujuan',
+        'date',
+        'stage',
         'created_at',
         'updated_at',
     ];

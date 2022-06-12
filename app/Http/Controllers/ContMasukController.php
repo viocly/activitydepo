@@ -26,6 +26,7 @@ class ContMasukController extends Controller
                 'cargo.nama_cargo',
                 'petugas_survey.nama_petugas'
             )
+            ->where('cont_msk.stage', 'created')
             ->get();
         $cargo = Cargo::all();
         $book_cont_msk = BookMsk::all();
@@ -36,7 +37,7 @@ class ContMasukController extends Controller
 
     public function add()
     {
-        $book_cont_msk = BookMsk::whereNotIn('id', ContMsk::pluck('id_book_msk'))->get();
+        $book_cont_msk = BookMsk::where('stage', 'booked')->get();
         $petugas_survey = Petugas::all();
         $cargo = Cargo::all();
         return view('cont_masuk.add', compact('book_cont_msk', 'petugas_survey', 'cargo'));
@@ -53,6 +54,10 @@ class ContMasukController extends Controller
             'angkutan'    => $request->angkutan,
             'driver'      => $request->driver,
             'nopol'       => $request->nopol,
+        ]);
+
+        BookMsk::where('id', $request->id_book_msk)->update([
+            'stage' => 'archive'
         ]);
 
         return redirect('/cont_masuk')->with('success', 'Data Berhasil disimpan');

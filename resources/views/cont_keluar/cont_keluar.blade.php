@@ -5,7 +5,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Container Masuk</h4>
+                <h4 class="page-title">Container Keluar</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/home">
@@ -22,7 +22,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Container Masuk</a>
+                        <a href="#">Container Keluar</a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Container Masuk</h4>
+                                <h4 class="card-title">Data Container Keluar</h4>
                                 <a class="btn btn-primary btn-round ml-auto" href="/cont_keluar/create">
                                     <i class="fa fa-plus"></i>
                                     Create
