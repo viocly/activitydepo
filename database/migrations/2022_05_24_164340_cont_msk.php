@@ -20,10 +20,10 @@ return new class extends Migration
             $table->foreignId('id_petugas')->constrained('petugas_survey');
             $table->foreignId('id_cargo')->constrained('cargo');
             $table->date('tgl_msk');
-            $table->string('kondisi');
-            $table->string('angkutan');
-            $table->string('driver');
-            $table->string('nopol');
+            $table->string('kondisi', 20);
+            $table->string('angkutan', 50);
+            $table->string('driver', 50);
+            $table->string('nopol', 10);
             $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->enum('stage', ['created', 'archive'])->default('created');
             $table->timestamps();

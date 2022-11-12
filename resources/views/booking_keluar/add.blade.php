@@ -17,7 +17,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Add</a>
+                        <a href="/booking_keluar">Add</a>
                     </li>
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>

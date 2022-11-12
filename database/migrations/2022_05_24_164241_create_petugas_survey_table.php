@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('petugas_survey', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_petugas');
+            $table->string('nama_petugas', 50);
             $table->timestamps();
         });
     }

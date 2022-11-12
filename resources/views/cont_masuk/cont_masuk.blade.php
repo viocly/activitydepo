@@ -54,7 +54,7 @@
                                             <th>Cargo</th>
                                             <th>Kondisi</th>
                                             <th>Type</th>
-                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,11 +69,11 @@
                                             <td>{{$row->nama_cargo}}</td>
                                             <td>{{$row->kondisi}}</td>
                                             <td>{{$row->type}}</td>
-                                            <td>
-                                                <!-- <a href="#" data-toggle="modal" class="btn btn-primary btn-xs"><i class="fas fa-eye"></i> View</a> -->
+                                            <!-- <td>
+                                                <a href="#" data-toggle="modal" class="btn btn-primary btn-xs"><i class="fas fa-eye"></i> View</a>
                                                 <a href="#modalEdit{{$row->id}}" data-toggle="modal" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</a>
-                                                <!-- <a href="#" data-toggle="modal" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Hapus</a> -->
-                                            </td>
+                                                <a href="#" data-toggle="modal" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Hapus</a>
+                                            </td> -->
                                         </tr>
                                         @endforeach
                                     </tbody>

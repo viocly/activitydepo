@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookKeluar;
+use App\Models\BookMsk;
 use App\Models\ContKeluar;
+use App\Models\ContMsk;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +14,21 @@ class ContKeluarController extends Controller
 {
     public function index()
     {
+        $petugas_survey = Petugas::all();
         $cont_keluar = ContKeluar::join('book_cont_keluar', 'book_cont_keluar.id', '=', 'cont_keluar.id_book_keluar')
             ->join('cont_msk', 'cont_msk.id', '=', 'book_cont_keluar.id_cont_msk')
+            ->join('book_cont_msk', 'book_cont_msk.id', 'cont_msk.id_book_msk')
+            ->join('petugas_survey', 'petugas_survey.id', '=', 'cont_keluar.id_petugas')
+            ->select(
+                'cont_keluar.*',
+                'book_cont_msk.no_container',
+                'book_cont_keluar.customer',
+                'book_cont_keluar.shiper',
+                'book_cont_keluar.tujuan',
+                'petugas_survey.nama_petugas'
+            )
             ->get();
 
-        $petugas_survey = Petugas::all();
 
         return view('cont_keluar.cont_keluar', compact('petugas_survey', 'cont_keluar'));
     }
@@ -41,7 +53,7 @@ class ContKeluarController extends Controller
             ContKeluar::create([
                 'id_book_keluar' => $request->id_book_keluar,
                 'id_petugas'     => $request->id_petugas,
-                'tgl_msk'        => $request->tgl_msk,
+                'tgl_keluar'     => $request->tgl_keluar,
                 'kondisi'        => $request->kondisi,
                 'angkutan'       => $request->angkutan,
                 'driver'         => $request->driver,
@@ -58,7 +70,7 @@ class ContKeluarController extends Controller
             throw $e;
         }
 
-        return redirect('/cont_masuk')->with('success', 'Data Berhasil disimpan');
+        return redirect('/cont_keluar')->with('success', 'Data Berhasil disimpan');
     }
 
     public function ajax(Request $request)

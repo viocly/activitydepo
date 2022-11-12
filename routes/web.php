@@ -41,7 +41,7 @@ Route::post('/petugas/store', [PetugasController::class, 'store']);
 Route::post('/petugas/{id}/update', [PetugasController::class, 'update']);
 Route::get('/petugas/{id}/destroy', [PetugasController::class, 'destroy']);
 
-//Data Laporan User
+//Data Laporan
 Route::get('/lap_user', [LaporanController::class, 'lap_user']);
 Route::get('/lap_user/cetak_user', [LaporanController::class, 'cetak_user']);
 
@@ -55,7 +55,7 @@ Route::get('/lap_cont_masuk', [LaporanController::class, 'lap_cont_masuk']);
 Route::get('/lap_cont_masuk/cetak_cont_masuk', [LaporanController::class, 'cetak_cont_masuk']);
 
 Route::get('/lap_cont_keluar', [LaporanController::class, 'lap_cont_keluar']);
-Route::get('/lap_cont_keluar/cetaK_cont_keluar', [LaporanController::class, 'cetaK_cont_keluar']);
+Route::get('/lap_cont_keluar/cetak_cont_keluar', [LaporanController::class, 'cetak_cont_keluar']);
 
 //Data Booking Masuk
 Route::get('/booking_masuk', [BookingMasukController::class, 'index']);

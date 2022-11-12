@@ -69,13 +69,13 @@
                                 <i class="fa fa-search"></i>
                             </a>
                         </li>
-                        <li class="nav-item dropdown hidden-caret">
+                        <!-- <li class="nav-item dropdown hidden-caret">
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                                 <div class="avatar-sm">
                                     <img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
                                 </div>
                             </a>
-                            <!-- <ul class="dropdown-menu dropdown-user animated fadeIn">
+                            <ul class="dropdown-menu dropdown-user animated fadeIn">
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg"><img src="/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
@@ -90,8 +90,8 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/logout"><i class="fa fa-lock"></i> Logout</a>
                                 </li>
-                            </ul> -->
-                        </li>
+                            </ul>
+                        </li> -->
 
                     </ul>
                 </div>

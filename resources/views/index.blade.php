@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>iTankDepo</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="/assets/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/assets/img/icon_itank.ico" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -32,17 +32,19 @@
 <body class="login">
     <div class="wrapper wrapper-login">
         <div class="container container-login animated fadeIn">
-            <h3 class="text-center">Silahkan Login</h3>
+            <center><img src="/assets/img/itanklogo_1.png" width="80px" height="75px"></center><br>
+
+            <h3 class="text-center">iTank Login</h3>
 
             <form method="POST" action="/cek_login" enctype="multipart/form-data">
                 @csrf
                 <div class="login-form">
                     <div class="form-group form-floating-label">
-                        <input id="email" name="email" type="text" class="form-control input-border-bottom" required autocomplete="off" value="admin@gmail.com">
-                        <label for="email" class="placeholder">Email</label>
+                        <input id="name" name="name" type="text" class="form-control input-border-bottom" required>
+                        <label for="name" class="placeholder">Username</label>
                     </div>
                     <div class="form-group form-floating-label">
-                        <input id="password" name="password" type="password" class="form-control input-border-bottom" required value="admin">
+                        <input id="password" name="password" type="password" class="form-control input-border-bottom" required>
                         <label for="password" class="placeholder">Password</label>
                         <div class="show-password">
                             <i class="flaticon-interface"></i>

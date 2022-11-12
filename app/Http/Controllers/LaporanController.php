@@ -128,13 +128,8 @@ class LaporanController extends Controller
 
     public function lap_book_keluar()
     {
-        $book_cont_msk = BookMsk::all();
-        $book_cont_keluar = BookKeluar::join('book_cont_msk', 'book_cont_msk.id', '=', 'book_cont_keluar.id_book_msk')
-            ->select(
-                'book_cont_keluar.*',
-                'book_cont_msk.no_container',
-                'book_cont_msk.type'
-            )
+        $book_cont_keluar = BookKeluar::join('cont_msk', 'cont_msk.id', '=', 'book_cont_keluar.id_cont_msk')
+            ->join('book_cont_msk', 'book_cont_msk.id', '=', 'cont_msk.id_book_msk')
             ->get();
 
         return view('laporan.lap_book_keluar.lap_book_keluar', compact('book_cont_keluar'));
@@ -148,25 +143,81 @@ class LaporanController extends Controller
         $tgl_selesai = $request->tgl_selesai;
 
         if ($tgl_mulai and $tgl_selesai) {
-            $book_cont_keluar = BookKeluar::join('book_cont_msk', 'book_cont_msk.id', '=', 'book_cont_keluar.id_book_msk')
-                ->select(
-                    'book_cont_keluar.*',
-                    'book_cont_msk.no_container',
-                    'book_cont_msk.type'
-                )
+            $book_cont_keluar = BookKeluar::join('cont_msk', 'cont_msk.id', '=', 'book_cont_keluar.id_cont_msk')
+                ->join('book_cont_msk', 'book_cont_msk.id', '=', 'cont_msk.id_book_msk')
                 ->whereBetween('book_cont_keluar.tgl_book_keluar', [$tgl_mulai, $tgl_selesai])
                 ->get();
 
             $sum_total = ContMsk::whereBetween('tgl_book_keluar', [$tgl_mulai, $tgl_selesai]);
         } else {
-            $book_cont_keluar = BookKeluar::join('book_cont_msk', 'book_cont_msk.id', '=', 'book_cont_keluar.id_book_msk')
-                ->select(
-                    'book_cont_keluar.*',
-                    'book_cont_msk.no_container',
-                    'book_cont_msk.type'
-                )
+            $book_cont_keluar = BookKeluar::join('cont_msk', 'cont_msk.id', '=', 'book_cont_keluar.id_cont_msk')
+                ->join('book_cont_msk', 'book_cont_msk.id', '=', 'cont_msk.id_book_msk')
                 ->get();
         }
         return view('laporan.lap_book_keluar.cetak_book_keluar', compact('book_cont_keluar', 'sum_total', 'tgl_mulai', 'tgl_selesai'));
+    }
+
+    public function lap_cont_keluar()
+    {
+        $petugas_survey = Petugas::all();
+        $cont_keluar = ContKeluar::join('book_cont_keluar', 'book_cont_keluar.id', '=', 'cont_keluar.id_book_keluar')
+            ->join('cont_msk', 'cont_msk.id', '=', 'book_cont_keluar.id_cont_msk')
+            ->join('book_cont_msk', 'book_cont_msk.id', 'cont_msk.id_book_msk')
+            ->join('petugas_survey', 'petugas_survey.id', '=', 'cont_keluar.id_petugas')
+            ->select(
+                'cont_keluar.*',
+                'book_cont_msk.no_container',
+                'book_cont_keluar.customer',
+                'book_cont_keluar.shiper',
+                'book_cont_keluar.tujuan',
+                'petugas_survey.nama_petugas'
+            )
+            ->get();
+
+
+        return view('laporan.lap_cont_keluar.lap_cont_keluar', compact('petugas_survey', 'cont_keluar'));
+    }
+
+    public function cetak_cont_keluar(Request $request)
+    {
+
+        $tgl_mulai = $request->tgl_mulai;
+        $tgl_selesai = $request->tgl_selesai;
+
+        if ($tgl_mulai and $tgl_selesai) {
+            $petugas_survey = Petugas::all();
+            $cont_keluar = ContKeluar::join('book_cont_keluar', 'book_cont_keluar.id', '=', 'cont_keluar.id_book_keluar')
+                ->join('cont_msk', 'cont_msk.id', '=', 'book_cont_keluar.id_cont_msk')
+                ->join('book_cont_msk', 'book_cont_msk.id', 'cont_msk.id_book_msk')
+                ->join('petugas_survey', 'petugas_survey.id', '=', 'cont_keluar.id_petugas')
+                ->select(
+                    'cont_keluar.*',
+                    'book_cont_msk.no_container',
+                    'book_cont_keluar.customer',
+                    'book_cont_keluar.shiper',
+                    'book_cont_keluar.tujuan',
+                    'petugas_survey.nama_petugas'
+                )
+                ->whereBetween('cont_keluar.tgl_keluar', [$tgl_mulai, $tgl_selesai])
+                ->get();
+
+            $sum_total = ContMsk::whereBetween('tgl_keluar', [$tgl_mulai, $tgl_selesai]);
+        } else {
+            $petugas_survey = Petugas::all();
+            $cont_keluar = ContKeluar::join('book_cont_keluar', 'book_cont_keluar.id', '=', 'cont_keluar.id_book_keluar')
+                ->join('cont_msk', 'cont_msk.id', '=', 'book_cont_keluar.id_cont_msk')
+                ->join('book_cont_msk', 'book_cont_msk.id', 'cont_msk.id_book_msk')
+                ->join('petugas_survey', 'petugas_survey.id', '=', 'cont_keluar.id_petugas')
+                ->select(
+                    'cont_keluar.*',
+                    'book_cont_msk.no_container',
+                    'book_cont_keluar.customer',
+                    'book_cont_keluar.shiper',
+                    'book_cont_keluar.tujuan',
+                    'petugas_survey.nama_petugas'
+                )
+                ->get();
+        }
+        return view('laporan.lap_cont_keluar.cetak_cont_keluar', compact('cont_keluar', 'sum_total', 'tgl_mulai', 'tgl_selesai', 'petugas_survey'));
     }
 }

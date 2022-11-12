@@ -47,7 +47,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>Username</th>
                                             <th>Email</th>
                                             <th>Level</th>
                                             <th>Action</th>
@@ -96,8 +96,8 @@
                 <div class="modal-body">
 
                     <div class="form-grup">
-                        <label>Nama Lengkap</label>
-                        <input type="text" class="form-control" name="name" placeholder="Nama Lengkap ..." required>
+                        <label>Usernamae</label>
+                        <input type="text" class="form-control" name="name" placeholder="Username ..." required>
                     </div>
 
                     <div class="form-grup">
@@ -151,8 +151,8 @@
                     <input type="hidden" value="{{$d->id}}" name="id" required>
 
                     <div class="form-grup">
-                        <label>Nama Lengkap</label>
-                        <input type="text" value="{{$d->name}}" class="form-control" name="name" placeholder="Nama Lengkap ..." required>
+                        <label>Username</label>
+                        <input type="text" value="{{$d->name}}" class="form-control" name="name" placeholder="Username ..." required>
                     </div>
 
                     <div class="form-grup">

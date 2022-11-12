@@ -51,6 +51,8 @@
                                             <th>Tanggal Booking</th>
                                             <th>Customer</th>
                                             <th>Consignee</th>
+                                            <th>Type</th>
+                                            <th>Ukuran</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -64,6 +66,8 @@
                                             <td>{{$row->tgl_book_msk}}</td>
                                             <td>{{$row->customer}}</td>
                                             <td>{{$row->consigne}}</td>
+                                            <td>{{$row->type}}</td>
+                                            <td>{{$row->ukuran}}</td>
                                             <td>{{$row->status}}</td>
                                             <td>
                                                 <!-- <a href="#" data-toggle="modal" class="btn btn-primary btn-xs"><i class="fas fa-eye"></i> View</a> -->

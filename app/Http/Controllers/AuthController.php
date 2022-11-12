@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -17,9 +17,9 @@ class AuthController extends Controller
     {
 
         $password = $request->input('password');
-        $email = $request->input('email');
+        $name = $request->input('name');
 
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::attempt(['name' => $name, 'password' => $password])) {
             return redirect()->intended('/home')->with('success', 'Login Berhasil');
         } else {
             return redirect()->intended('/')->with('error', 'Username atau Password salah!');

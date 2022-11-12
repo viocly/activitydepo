@@ -18,11 +18,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_cont_msk')->constrained('cont_msk');
             $table->date('tgl_book_keluar');
-            $table->string('customer');
-            $table->string('shiper');
-            $table->string('vessel');
-            $table->string('voyage');
-            $table->string('tujuan');
+            $table->string('customer', 50);
+            $table->string('shiper', 50);
+            $table->string('vessel', 50);
+            $table->string('voyage', 10);
+            $table->string('tujuan', 50);
             $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->enum('stage', ['booked', 'archive'])->default('booked');
             $table->timestamps();

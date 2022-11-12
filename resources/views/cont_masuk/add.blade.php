@@ -9,7 +9,7 @@
                 <h4 class="page-title">Add Container Masuk</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="#">
+                        <a href="/home">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -17,7 +17,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Add</a>
+                        <a href="/cont_masuk">Add</a>
                     </li>
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>

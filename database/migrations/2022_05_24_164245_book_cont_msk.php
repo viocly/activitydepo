@@ -16,17 +16,17 @@ return new class extends Migration
     {
         Schema::create('book_cont_msk', function (Blueprint $table) {
             $table->id();
-            $table->string('no_container');
+            $table->string('no_container', 11);
             $table->date('tgl_book_msk');
-            $table->string('customer');
-            $table->string('consigne');
-            $table->string('vessel');
-            $table->string('voyage');
-            $table->string('asal');
+            $table->string('customer', 50);
+            $table->string('consigne', 50);
+            $table->string('vessel', 50);
+            $table->string('voyage', 10);
+            $table->string('asal', 50);
             $table->integer('ukuran');
-            $table->string('type');
+            $table->string('type', 20);
             $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('status');
+            $table->string('status', 10);
             $table->enum('stage', ['booked', 'archive'])->default('booked');
             $table->timestamps();
         });

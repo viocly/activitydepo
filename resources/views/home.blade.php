@@ -126,7 +126,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Jumlah Container Masuk & Keluar</div>
+                            <div class="card-title">Total Container Masuk & Keluar</div>
                         </div>
                         <div class="card-body">
                             <div class="chart-container">
@@ -152,8 +152,7 @@
         </div>
     </div>
 </div>
-<!-- </div>
-</div> -->
+
 
 </div>
 
@@ -164,15 +163,14 @@
 
 
 <script>
-    var
-        barChart = document.getElementById('barChart').getContext('2d'),
-        doughnutChart = document.getElementById('doughnutChart').getContext('2d')
+    var doughnutChart = document.getElementById('doughnutChart').getContext('2d')
 
     var myDoughnutChart = new Chart(doughnutChart, {
         type: 'doughnut',
         data: {
             datasets: [{
-                data: [],
+
+                data: ['{{$cont_msk}}', '{{$cont_keluar}}'],
                 backgroundColor: ['#1d7af3', '#f3545d']
             }],
 
@@ -199,33 +197,61 @@
     });
 </script>
 
-<!-- <script>
-    const ctx = document.getElementById('doughnutChart');
-    const doughnutChart = new Chart(ctx, {
-        type: 'doughnut',
+<script>
+    var barChart = document.getElementById('barChart').getContext('2d')
+    var barChart = new Chart(barChart, {
+        type: 'bar',
         data: {
-            labels: ['Container Masuk', 'Container Keluar'],
+            labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
             datasets: [{
-                label: '# of Votes',
-                data: [{{$cont_msk}}, {{$cont_keluar}}],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
+                label: "Container Masuk",
+                data: [
+                    '{{$masuk_jan}}',
+                    '{{$masuk_feb}}',
+                    '{{$masuk_mar}}',
+                    '{{$masuk_apr}}',
+                    '{{$masuk_mei}}',
+                    '{{$masuk_jun}}',
+                    '{{$masuk_jul}}',
+                    '{{$masuk_agu}}',
+                    '{{$masuk_sep}}',
+                    '{{$masuk_okt}}',
+                    '{{$masuk_nov}}',
+                    '{{$masuk_des}}'
                 ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)'
+                backgroundColor: '#1d7af3',
+            }, {
+                label: "Container Keluar",
+                data: [
+                    '{{$keluar_jan}}',
+                    '{{$keluar_feb}}',
+                    '{{$keluar_mar}}',
+                    '{{$keluar_apr}}',
+                    '{{$keluar_mei}}',
+                    '{{$keluar_jun}}',
+                    '{{$keluar_jul}}',
+                    '{{$keluar_agu}}',
+                    '{{$keluar_sep}}',
+                    '{{$keluar_okt}}',
+                    '{{$keluar_nov}}',
+                    '{{$keluar_des}}'
                 ],
-                borderWidth: 1
-            }]
+                backgroundColor: '#f3545d',
+            }],
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
         }
     });
-</script> -->
+</script>
+
+
 @endsection
